@@ -12,15 +12,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 
 @Service
 @AllArgsConstructor
 public class FileService {
 
     private FileRepo fileRepo;
-    public Response_file SaveFile(MultipartFile file)
-    {
-        return new Response_file();
+    public Response_file SaveFile(MultipartFile file,String sendUserID) throws IOException {
+        FileEntity lcfile=new FileEntity();
+
+        lcfile.setData(file.getBytes());
+        lcfile.setName(file.getOriginalFilename());
+        lcfile.setType(file.getContentType());
+        lcfile.setDownloadURL(CommonUtils.getUUID());
+        lcfile.setUserID(sendUserID);
+        System.out.println("Savingg "+file);
+        fileRepo.save(lcfile);
+        return new Response_file(lcfile);
     }
 
     public Response_file SaveFile(File_DTO dto)
