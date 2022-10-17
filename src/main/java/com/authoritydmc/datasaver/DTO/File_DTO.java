@@ -6,26 +6,34 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Arrays;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class response_file {
+public class File_DTO {
 
-    private String name;
+        private String name;
 
-    private String type;
+        private String type;
 
-    private long Size;
-    private String downloadURL;
+        //Data needed to be in BASE64 String ....
+        private String data;
+
+        private String userID;
+
+
 
     @Override
     public String toString() {
-        return "response_file{" +
+        return "file_dto{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
-                ", Size=" + Size +
-                ", downloadURL='" + downloadURL + '\'' +
+
+                ", userID='" + userID + '\'' +
                 '}';
     }
 }
+
+
