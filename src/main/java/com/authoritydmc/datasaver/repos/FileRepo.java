@@ -11,5 +11,5 @@ public interface FileRepo extends JpaRepository<FileEntity, Long> {
     public FileEntity findByDownloadURL(String downloadURL);
 
 
-    FileEntity[] findAllByUserID(String userID);
+    FileEntity[] findAllByUserID(Long userID);
 }

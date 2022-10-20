@@ -3,7 +3,7 @@ package com.authoritydmc.datasaver.resources;
 import com.authoritydmc.datasaver.DTO.Response_file;
 import com.authoritydmc.datasaver.DTO.File_DTO;
 import com.authoritydmc.datasaver.services.FileService;
-import com.authoritydmc.datasaver.utils.ResponseMessage;
+import com.authoritydmc.datasaver.DTO.ResponseMessage;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
-
-import static com.authoritydmc.datasaver.DatasaverApplication.MAIN_LOGGER;
 
 @RestController
 @RequestMapping("/file")
@@ -23,12 +21,12 @@ public class FileController {
     private FileService fileService;
 
     @PostMapping("upload")
-    public ResponseEntity<Object> upload_file(@RequestParam("userID") Optional<String> userID,@RequestParam("file") MultipartFile file)
+    public ResponseEntity<Object> upload_file(@RequestParam("userID") Optional<Long> userID,@RequestParam("file") MultipartFile file)
     {
 
         String message = "";
         try {
-            Response_file rf=fileService.SaveFile(file,userID.orElse("NO-USER-ID-GIVEN"));
+            Response_file rf=fileService.SaveFile(file,userID.orElse(-1l));
 
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(rf);
@@ -57,7 +55,7 @@ public class FileController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Response_file[]> get_users_all_file(@RequestParam Optional<String> userID)
+    public ResponseEntity<Response_file[]> get_users_all_file(@RequestParam Optional<Long> userID)
     {
 
         String message = "File Doesn't exist";

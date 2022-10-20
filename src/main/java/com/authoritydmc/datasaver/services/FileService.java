@@ -19,7 +19,7 @@ import java.io.IOException;
 public class FileService {
 
     private FileRepo fileRepo;
-    public Response_file SaveFile(MultipartFile file,String sendUserID) throws IOException {
+    public Response_file SaveFile(MultipartFile file,Long sendUserID) throws IOException {
         FileEntity lcfile=new FileEntity();
 
         lcfile.setData(file.getBytes());
@@ -73,7 +73,7 @@ public class FileService {
             return null;
         }
     }
-    public Response_file[] getFilebyUserId(String userID) {
+    public Response_file[] getFilebyUserId(Long userID) {
 
        FileEntity[] fileEntities= fileRepo.findAllByUserID(userID);
 

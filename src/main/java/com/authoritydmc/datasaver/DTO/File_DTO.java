@@ -21,7 +21,7 @@ public class File_DTO {
         //Data needed to be in BASE64 String ....
         private String data;
 
-        private String userID;
+        private Long userID;
 
 
 

@@ -29,7 +29,7 @@ public class FileEntity {
     private String type;
     @Lob
     private byte[] data;
-    private String userID;
+    private Long userID;
 
     private  String downloadURL;
 

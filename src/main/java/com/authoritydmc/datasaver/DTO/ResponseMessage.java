@@ -1,4 +1,4 @@
-package com.authoritydmc.datasaver.utils;
+package com.authoritydmc.datasaver.DTO;
 
 public class ResponseMessage {
     private String message;
