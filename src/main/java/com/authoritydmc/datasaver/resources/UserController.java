@@ -5,6 +5,8 @@ import com.authoritydmc.datasaver.DTO.UserDTO;
 import com.authoritydmc.datasaver.DTO.UserLoginDTO;
 import com.authoritydmc.datasaver.DTO.UserLoginResponse;
 import com.authoritydmc.datasaver.services.UserService;
+import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
+    @Autowired
     private UserService userService;
     @PostMapping("/signup")
-    public ResponseEntity<ResponseMessage> signupUser(@RequestBody UserDTO user)
+    public ResponseEntity<UserLoginResponse> signupUser(@RequestBody UserDTO user)
     {
 
 
-       ResponseMessage responseMessage= userService.createUser(user);
+       UserLoginResponse responseMessage= userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseMessage);
     }
 

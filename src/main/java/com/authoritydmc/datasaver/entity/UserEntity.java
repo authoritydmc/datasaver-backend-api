@@ -1,6 +1,7 @@
 package com.authoritydmc.datasaver.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,17 +13,28 @@ import java.time.LocalDateTime;
 @Table(name = "users")
 public class UserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
-
-    Long UserID;
+     Long userID;
     String userName;
     String name;
+    @Column(unique = true)
     String email;
     String password_hashed;
     LocalDateTime doj;
-    LocalDateTime lastLoggedIn;
 
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "userID=" + userID +
+                ", userName='" + userName + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", doj=" + doj +
+                ", lastLoggedIn=" + lastLoggedIn +
+                '}';
+    }
+
+    LocalDateTime lastLoggedIn;
 
 }
