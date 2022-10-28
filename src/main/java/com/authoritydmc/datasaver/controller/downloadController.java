@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/download")
 @AllArgsConstructor
+@CrossOrigin("http://localhost:4200")
 public class downloadController {
 
     private FileService fileService;
@@ -31,12 +32,12 @@ public class downloadController {
         final Logger LOGGER=LoggerFactory.getLogger(downloadController.class);
         FileEntity file = fileService.getFileEntityBYUUID(uuid);
         LOGGER.debug("Trying to download file "+uuid);
-        System.out.println("DOWNLOAD FILE METHOD CALLED");
+        System.out.println("DOWNLOAD FILE METHOD CALLED"+file);
         if (file == null) {
             LOGGER.debug("File not found "+uuid);
-            System.out.println("DOWNLOAD FILE METHOD CALLED");
+            System.out.println("DOWNLOAD FILE METHOD CALLED file is null");
 
-            return ResponseEntity.noContent()
+            return ResponseEntity.status(404)
                     .build();
         }
         LOGGER.debug("File found "+uuid);
@@ -45,7 +46,7 @@ public class downloadController {
         byte[] isr = file.getData();
         String fileName = file.getName();
         HttpHeaders respHeaders = new HttpHeaders();
-        respHeaders.setContentLength(isr.length);
+//        respHeaders.setContentLength(isr.length);
         respHeaders.setContentType(new MediaType(fileType[0], fileType[1]));
         respHeaders.setCacheControl("must-revalidate, post-check=0, pre-check=0");
         respHeaders.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName);

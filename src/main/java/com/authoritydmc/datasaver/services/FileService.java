@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
@@ -27,6 +28,7 @@ public class FileService {
         lcfile.setType(file.getContentType());
         lcfile.setDownloadURL(CommonUtils.getUUID());
         lcfile.setUserID(sendUserID);
+        lcfile.setUpload_time(LocalDateTime.now());
         System.out.println("Savingg "+file);
         fileRepo.save(lcfile);
         return new Response_file(lcfile);
@@ -39,9 +41,11 @@ public class FileService {
         file.setData(CommonUtils.decodeBase64(dto.getData()));
         file.setName(dto.getName());
         file.setType(dto.getType());
+        file.setUpload_time(LocalDateTime.now());
         file.setDownloadURL(CommonUtils.getUUID());
         file.setUserID(dto.getUserID());
         System.out.println("Savingg "+file);
+        System.out.println("Decoded base64:"+file.getData());
         fileRepo.save(file);
         return new Response_file(file);
     }

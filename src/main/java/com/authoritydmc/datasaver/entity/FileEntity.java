@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -33,15 +34,18 @@ public class FileEntity {
 
     private  String downloadURL;
 
+    private LocalDateTime upload_time;
+
     @Override
     public String toString() {
         return "FileEntity{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
 
-                ", userID='" + userID + '\'' +
+                ", userID=" + userID +
                 ", downloadURL='" + downloadURL + '\'' +
+                ", upload_time=" + upload_time +
                 '}';
     }
 }

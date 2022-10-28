@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,23 +22,28 @@ public class Response_file {
     private String type;
 
     private long Size;
-    private String downloadURL;
-
+    private String fileURI;
+    private String fullDownloadURL;
+    private LocalDateTime upload_time;
     public Response_file(FileEntity file)
     {
         this.name=file.getName();
         this.type=file.getType();
         this.Size=file.getData().length;
-        this.downloadURL= CommonUtils.BASE_DOWNLOAD_URL +file.getDownloadURL();
+        this.fileURI= file.getDownloadURL();
+        this.upload_time=file.getUpload_time();
+        this.fullDownloadURL=CommonUtils.FULL_DOWNLOAD_URL+file.getDownloadURL();
 
     }
+
     @Override
     public String toString() {
-        return "response_file{" +
+        return "Response_file{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", Size=" + Size +
-                ", downloadURL='" + downloadURL + '\'' +
+                ", fileURI='" + fileURI + '\'' +
+                ", fullDownloadURL='" + fullDownloadURL + '\'' +
                 '}';
     }
 }

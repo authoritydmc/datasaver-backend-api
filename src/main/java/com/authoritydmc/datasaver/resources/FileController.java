@@ -14,12 +14,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/file")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @AllArgsConstructor
 public class FileController {
 
     private FileService fileService;
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("upload")
     public ResponseEntity<Object> upload_file(@RequestParam("userID") Optional<Long> userID,@RequestParam("file") MultipartFile file)
     {
