@@ -32,7 +32,7 @@ public class Response_file {
         this.Size=file.getData().length;
         this.fileURI= file.getDownloadURL();
         this.upload_time=file.getUpload_time();
-        this.fullDownloadURL=CommonUtils.FULL_DOWNLOAD_URL+file.getDownloadURL();
+        this.fullDownloadURL=CommonUtils.FULL_DOWNLOAD_URL_WITH_IP+file.getDownloadURL();
 
     }
 

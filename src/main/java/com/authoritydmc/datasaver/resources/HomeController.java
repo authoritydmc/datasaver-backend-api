@@ -1,6 +1,7 @@
 package com.authoritydmc.datasaver.resources;
 
 import com.authoritydmc.datasaver.DTO.ResponseMessage;
+import com.authoritydmc.datasaver.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
@@ -29,8 +30,10 @@ public class HomeController {
         String BASEurl="http://"+ip+":"+port+"/";
         map.put("message"," Welcome to DataSaver Api ,Version : "+api_version +"<br>Available @ <a href='"+BASEurl+"' target='_blank'>"+BASEurl+"</a>");
 
-        map.put("BASE_URL",ip);
+        CommonUtils.FULL_DOWNLOAD_URL_WITH_IP=BASEurl+CommonUtils.BASE_DOWNLOAD_URL;
+        map.put("BASE_IP",ip);
         map.put("BASE_PORT",String.valueOf(port));
+        map.put("BASE_URL",BASEurl);
 
         return ResponseEntity.status(HttpStatus.OK).body(map);
     }

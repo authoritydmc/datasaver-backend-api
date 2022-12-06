@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/download")
 @AllArgsConstructor
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class downloadController {
 
     private FileService fileService;
